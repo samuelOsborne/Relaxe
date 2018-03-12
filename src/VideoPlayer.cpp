@@ -8,18 +8,22 @@
 VideoPlayer::VideoPlayer(const std::string &videoDirectoryPath)
 {
   if (!(this->videoManager.loadVideosInDirectory(videoDirectoryPath)))
-    throw std::runtime_error("Can't load video directory");
+    throw std::runtime_error("Can't load video directory!");
   this->videoPaths = this->videoManager.getVideoPaths();
+  if (this->videoPaths.empty())
+    throw std::runtime_error("No videos loaded!");
   this->it = this->videoPaths.begin();
   this->videoCapture.open(*this->it);
   if (!this->videoCapture.isOpened())
-    std::runtime_error("Can't load video directory");
+    std::runtime_error("Can't load videos!");
   cvNamedWindow("Relaxe", CV_WINDOW_NORMAL);
   cvSetWindowProperty("Relaxe", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
 }
 
 void VideoPlayer::videoLoop()
 {
+  char			c;
+
   while (1)
     {
       cv::Mat frame;
@@ -28,18 +32,18 @@ void VideoPlayer::videoLoop()
       if (frame.empty())
 	break;
       imshow("Relaxe", frame);
-      char c = (char) cv::waitKey(25);
-      //change to the enter key
+      c = (char) cv::waitKey(25);
       if (c == 10)
 	{
-	  if (it == videoPaths.end())
-	    it = videoPaths.begin();
+	  if (it == this->videoPaths.end())
+	    it = this->videoPaths.begin();
 	  this->videoCapture.open(*it);
 	  if (!this->videoCapture.isOpened())
 	    std::runtime_error("Error opening video stream or file");
 	  ++it;
 	}
-      else if (c == 27)
+      else
+      if (c == 27)
 	break;
     }
   cv::destroyAllWindows();
