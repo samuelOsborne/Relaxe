@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.9)
-project(relaxe)
+project(Relaxe)
 
 set(CMAKE_BUILD_TYPE Debug)
 find_package(OpenCV REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../")
 
 include_directories(include)
 
@@ -13,6 +14,6 @@ file(GLOB SOURCE_FILES
         src/*.cpp
         include/*.h*)
 
-add_executable(relaxe ${SOURCE_FILES})
+add_executable( Relaxe ${SOURCE_FILES})
 
-target_link_libraries( relaxe ${OpenCV_LIBS})
+target_link_libraries( Relaxe ${OpenCV_LIBS})

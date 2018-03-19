@@ -11,17 +11,15 @@ int main(int argc, char **argv)
   VideoManager				videoManager;
   std::string				spotify;
 
-  if (argc != 3)
+  if (argc != 2)
     {
-      std::cerr << "USAGE: ./relaxe [video path] [spotify script path]"
+      std::cerr << "USAGE: ./relaxe [video path]"
 		<< std::endl;
       return (1);
     }
   try
     {
-      spotify.insert(0, argv[2]);
-      spotify += " play";
-      if ((system(spotify.c_str()) == -1))
+      if ((system("./spotify_scripts/spotify_controller.sh play") == -1))
 	std::cerr << "Could not execute spotify script!" << std::endl;
       VideoPlayer videoPlayer(argv[1]);
       videoPlayer.videoLoop();
