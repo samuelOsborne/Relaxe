@@ -38,4 +38,3 @@ videos
 
 * Voice recognition to stop the app
 * Installation script that inserts into a cron job at demanded time
-* 
