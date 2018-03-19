@@ -13,7 +13,6 @@ whilst playing a selection of videos of your choice.
 
 To install Relaxe all you have to do is download the zip and run:
 
-
 ```
 mkdir build; cd build; cmake ..; make
 
@@ -29,10 +28,14 @@ To execute Relaxe simply execute the Relaxe binary:
 
 Change video with '1' and exit the app with the esc key
 
-
 ## Built With
 
 * [OpenCV](https://opencv.org/) Open Source Computer Vision Library used to play
 videos
 * [Spotify](https://github.com/hnarayanan/shpotify) - Spotify script
 
+## TODO
+
+* Voice recognition to stop the app
+* Installation script that inserts into a cron job at demanded time
+* 
