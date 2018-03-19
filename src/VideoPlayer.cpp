@@ -30,17 +30,20 @@ void VideoPlayer::videoLoop()
 
       this->videoCapture >> frame;
       if (frame.empty())
-	break;
+	{
+	  this->videoCapture.set(CV_CAP_PROP_POS_FRAMES, 0);
+	  this->videoCapture >> frame;
+	}
       imshow("Relaxe", frame);
       c = (char) cv::waitKey(25);
-      if (c == 10)
+      if (c == '1')
 	{
+	  it++;
 	  if (it == this->videoPaths.end())
 	    it = this->videoPaths.begin();
 	  this->videoCapture.open(*it);
 	  if (!this->videoCapture.isOpened())
 	    std::runtime_error("Error opening video stream or file");
-	  ++it;
 	}
       else
       if (c == 27)
